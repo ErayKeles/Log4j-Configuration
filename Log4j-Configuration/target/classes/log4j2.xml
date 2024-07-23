@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
     <Appenders>
-        <RollingFile name="RollingFileAppender" fileName="logs/timer.log"
-                     filePattern="logs/timer-%d{MM-dd-yyyy}-%i.log">
-            <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level: %msg%n%throwable"/>
+        <RollingFile name="RollingFile" fileName="C:/Users/erayk/OneDrive/Desktop/logs/timer-%d{yyyy-MM-dd}-%i.log"
+                     filePattern="C:/Users/erayk/OneDrive/Desktop/logs/timer-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
             <Policies>
-                <SizeBasedTriggeringPolicy size="1MB"/>
+                <SizeBasedTriggeringPolicy size="2kb"/>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
-            <DefaultRolloverStrategy max="1"/>
+            <DefaultRolloverStrategy max="10"/>
+            <Delete basePath="C:/Users/erayk/OneDrive/Desktop/logs" maxAge="1d">
+                <IfFileName glob="*.log" />
+            </Delete>
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="org.example.myTimerLoggings" level="debug" additivity="false">
-            <AppenderRef ref="RollingFileAppender"/>
-        </Logger>
-        <Root level="error">
-            <AppenderRef ref="RollingFileAppender"/>
+        <Root level="debug">
+            <AppenderRef ref="RollingFile"/>
         </Root>
     </Loggers>
 </Configuration>
