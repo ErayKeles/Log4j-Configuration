@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <RollingFile name="RollingFileAppender" fileName="logs/timer.log"
+                     filePattern="logs/timer-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level: %msg%n%throwable"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1MB"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <DefaultRolloverStrategy max="1"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.example.myTimerLoggings" level="debug" additivity="false">
+            <AppenderRef ref="RollingFileAppender"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="RollingFileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
